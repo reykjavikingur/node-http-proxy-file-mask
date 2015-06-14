@@ -1,0 +1,16 @@
+{
+  "name": "conditional-reverse-proxy",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "browser-sync": "~2.6.10",
+    "http-proxy": "~1.11.1",
+    "underscore": "~1.8.3"
+  }
+}
