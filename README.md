@@ -1,22 +1,51 @@
-# Conditional Reverse Proxy
+# Node HTTP Proxy File Mask
 
-1. Configure local web server to serve files from local document root.
-1. Point local web server to proxy target by host, e.g. https://example.com, http://domain.tl:1235
-1. Provide criteria for whether to serve from local or proxy target, given web request
-1. Specify URL rewriting rules, if any.
-1. Specify HTML transform rules, if any.
+This is a Node module that generates HTTP server middleware
+for a reverse proxy that hosts both remote and local content.
 
-## Scenarios
+## Steps
 
-### Add Content
+* Run a local Node web server (using Connect or Browser-Sync)
+* Specify a remote host and a local directory
+* Use this module to generate middleware for your local web server
 
-Make some URL's come from local directory and others come from remote server.
+## Effects
 
-Example: Proxy everything from remote server but handle URL's beginning with "/improv" by serving from local "improv" directory.
+When the local web server receives a request,
+the middleware inspects the URL to determine whether it corresponds
+to a file under the local directory.
+If so, then the response is the contents of that file.
+If not, then the request is proxied to the remote server,
+and the response is whatever the remote server sent.
 
-### Modify Content
+## Motivation
 
-Of the URL's coming from remote server, change the response body.
+You can run a local web development environment
+without hosting the entire site locally
+and without synchronizing to a remote server until deployment.
+You can make and test your changes locally,
+and then you can transfer your files to the remote server
+all at once already knowing how they will integrate with
+pre-existing content.
 
-Example: Proxy everything from remote server normally but append `<link href="http://cdn.com/improv.css"/>` to HTML head element to response from `/index.html`.
+## Example
 
+Suppose you want to proxy `http://example.com` and serve from a local directory `./html`.
+
+```
+# configure proxy file mask
+var httpProxyFileMask = require('http-proxy-file-mask');
+var middleware = httpProxyFileMask({
+	proxyTarget: 'http://example.com',
+	baseDir: './html'
+});
+
+# configure local web server
+var browserSync = require('browser-sync');
+var bs = browserSync.create();
+bs.init({
+	server: { baseDir: './html' },
+	middleware: [middleware]
+});
+
+```
