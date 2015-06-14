@@ -1,16 +1,26 @@
 {
-  "name": "conditional-reverse-proxy",
-  "version": "0.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "BSD-2-Clause",
-  "dependencies": {
-    "browser-sync": "~2.6.10",
-    "http-proxy": "~1.11.1",
-    "underscore": "~1.8.3"
-  }
+	"name": "http-proxy-file-mask",
+	"version": "0.1.0",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/reykjavikingur/node-http-proxy-file-mask",
+	},
+	"description": "Conditional reverse proxy middleware for Node HTTP server",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": {
+		"name": "Andrew Strader",
+		"url": "https://github.com/reykjavikingur"
+	},
+	"license": {
+		"type": "MIT",
+		"url": "http://www.opensource.org/licenses/mit-license.php"
+	},
+	"dependencies": {
+		"browser-sync": "~2.6.10",
+		"http-proxy": "~1.11.1",
+		"underscore": "~1.8.3"
+	}
 }
